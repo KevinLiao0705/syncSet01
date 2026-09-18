@@ -1,0 +1,44 @@
+1   install tomcat8 web server :
+    sudo apt-get install tomcat8
+2   install java8:
+    sudo apt-get install oracle-java8-jdk
+3
+    安裝WiringPi
+    官網中有兩種方式安裝，一種使用的是GIT方式；另一種使用的是下載包方式，兩者選擇其一即可。
+    由於我使用的是第一種GIT方式，所以要先安裝GIT相關套件:
+    sudo apt-get install git-core
+
+    接著更新最新的套件資訊及套件軟體
+    sudo apt-get update && sudo apt-get -y upgrade
+
+    用GIT取得WiringPi:
+    git clone git://git.drogon.net/wiringPi
+
+    當GIT下載完成後會出現一個wiringPi目錄，接著執行下列指令:
+    cd wiringPi
+    git pull origin
+
+    這個時候wiringPi內會出現最新版本的軟體，然後這個目錄下執行:
+    cd wiringPi
+    ./build
+
+4   insta liphone
+    xxxxxxxxxxxxxxxxxxxxxx
+//================================================================================================================================    
+* Delete  "/var/lib/tomcat8/webapps/ROOT"
+* Copy "ROOT.war" to  "/var/lib/tomcat8/webapps/"
+* Copy "nkv6in1" folder to  "/home/pi/kevin/" 
+* copy "nkv6in1/autostart_cs.sh" to "/home/pi/"
+* copy "nkv6in1/autostart_dt.sh" to "/home/pi/"
+* cd "/home/pi/kevin/nkv6in1/nkv6in1_io" 
+* enter "sudo ./m.sh"     
+//==========================================
+//for Desk Top
+* edit autostart_cs.sh , add '#' at the first of all line  
+* pi@raspberry:~ $ mkdir .config/autostart 
+* copy autostart_dt.desktop to "/home/pi/.config/autostart/" 
+//==========================================
+//for Console
+* edit autostart_cs.sh , delete '#' at the first of all line  
+* edit /home/pi/.bashrc
+    insert "[ -z $DISPLAY ] && [ $(tty) = "/dev/tty1" ] && ./autostart_cs.sh" to last line

@@ -1,0 +1,50 @@
+<Package formate> 460800,8,n,1
+0xEA, (packageBody), 0xEB
+
+<packageBody> low Byte Tx first
+(deviceId:2B), (serialId:2B), (groupId:2b), 
+(payloadLen:2B), (payload: xxB), (chksum0:1B), (chksum1:1B)
+
+
+0xEA is head pack id.
+0xEB is end pack id.
+0xEC is alt code
+chksum0= 0xAB xor the byte of payload each 
+chksum1= the sum of payload each byte; 
+
+
+When packageBody byte XX is one of 0xEA,0xAB,0xEC
+this byte must change to [0xEC,(0xAB xor XX)]
+
+//get information
+deviceId=0x2537
+serialId=0x0005~0x0008
+groupId=0xAB00
+payloadLen=10
+payload: 0x1000,0x0000,0x0000,0x0000,0x0000
+
+//
+powerOn:
+payloadLen=10
+payload: 0x2000,0xffff,0xffff,0xffff,0x0014
+
+powerOff:
+payloadLen=10
+payload: 0x2001,0xffff,0xffff,0xffff,0x0014
+
+
+
+
+Module respone:
+deviceId=0x2537
+serialId=0x0005~0x0008
+groupId=0xAC00
+payloadLen=30
+payload: 0x1000,0x0000,0x0000,0x0000,0x000A
+         PSFLAG:2B, V50VADI:2B, I50VADI:2B, T50VADI:2B, V32VADI:2B, I32VADI:2B, T32VADI:2B,
+         0xXXXX, 0xXXXX, 0xXXXX
+
+PSFLAG.1 FAUIT IN
+PSFLAG.2 P50VEN
+PSFLAG.3 P32VEN
+

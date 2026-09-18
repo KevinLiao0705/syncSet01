@@ -1,0 +1,138 @@
+[winFrame_bm]	<56>
+[winFrame_wm]                <8>
+[winFrame_hm]                 <30>               --0:text,1:int,2:float 
+[linuxWin_f]				<1>
+[socket_ip]				<127.0.0.1>
+[socket_port]				<1235>
+
+
+    [ip_type] <0>
+    [ip_address] <192.168.0.15233>
+    [subnet_mask] <255.255.255.0>
+    [router_ip] <192.168.2.254>
+    [pppoe_id] <>
+    [pppoe_pin] <>
+    [dns_type] <1>
+    [dns_ip] <192.168.0.1>
+    [dns_ip2] <192.168.0.1>
+    [lay3_qos] <0>
+    [vlan_tag] <0>
+    [qos_priority] <0>
+    //table2                                                            
+    //=================================================================
+    [voice_coder0] <3>
+    [voice_coder1] <3>
+    [voice_coder2] <3>
+    [voice_coder3] <3>
+    [voice_coder4] <0>
+    [voice_coder5] <0>
+    [voice_coder6] <0>
+    [frame_number0] <2>
+    [frame_number1] <1>
+    [frame_number2] <1>
+    [frame_number3] <1>
+    [frame_number4] <2>
+    [frame_number5] <2>
+    [frame_number6] <2>
+    [ilbcframe] <1>
+    [speex_rate] <3>
+    [vad] <0>
+    [agc] <0>
+    [aec] <1>
+    [register] <1>
+    [sip_proxy] <192.168.0.3>
+    [sip_port] <5060>
+    [sip_domain] <192.168.2.1>
+    [outbound_proxy] <1>
+    [dns_srv] <0>
+    [user_number] <321>
+    [auth_id] <321>
+    [auth_pin] <1234>
+    [user_name] <321>
+    [local_port] <5060>
+    [rtp_port] <6000>
+    [register_ttl] <60>
+    [keep_alive] <20>
+    [dtmf_type] <1>
+    [dtmf_payload] <101>
+    [adpcm32_payload] <111>
+    [ilbcpayload] <98>
+    [speex_payload] <110>
+    [message_number] <>
+    [prack] <1>
+    [subscribe_mwi] <1>
+    [proxy_require] <>
+    [nat_traversal] <0>
+    [nat_ip] <0.0.0.0>
+    [stun_server] <>
+    [stun_port] <0>
+    [fwd_number] <>
+    [fwd_always] <0>
+    [fwd_busy] <0>
+    [fwd_noanswer] <0>
+
+
+    [noanswer_timeout] <60>
+    [auto_answer] <0>
+    [call_waiting] <0>
+
+
+    [dial_prefix] <>
+    [hotline_number] <>
+    [use_digitmap] <0>
+    
+    [digitmap_timeout] <5>
+    [pound_call] <0>
+
+    //table5
+    //=====================================================
+    [admin_pin] <>
+    [syslog_ip] <255.255.255.255>
+    [ptt_ctype] <0>
+
+    [vol_input] <7>
+    [vol_output] <20>
+    [speaker_vol] <20>
+    [ring_vol] <31>
+    [provision_server] <>
+    [provision_port] <80>
+    [provision_ttl] <1440>
+    [sntp_dns] <time.windows.com>
+    [time_zone] <60>
+
+    [day_light] <0>
+
+
+    [cor_invert] <1>
+    [first_phase_tim] <100>
+    [on_min_tim] <2>
+    [on_max_tim] <40>
+    [off_min_tim] <2>
+    [off_max_tim] <40>
+    [end_phase_tim] <50>
+    [act1_phase_no] <3>
+    [act1_call] <303>
+    [act2_phase_no] <4>
+    [act2_call] <305>
+    [cut_phase_no] <5>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run base3.Base3",
+            "request": "launch",
+            "mainClass": "base3.Base3",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug base3.Base3",
+            "request": "launch",
+            "mainClass": "base3.Base3",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopOnEntry": false
+        }
+    ]
+}

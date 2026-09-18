@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=autostart_dt
+NoDisplay=true
+Exec=/home/pi/autostart_dt.sh

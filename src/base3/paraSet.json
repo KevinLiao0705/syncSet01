@@ -1,0 +1,167 @@
+{
+ "version" : "1000"
+,"uart0_port" : "7"
+,"uart0_boudrate" : "115200"
+,"uart0_parity" : "None"
+,"processType" : "sipPbx"
+,"icsCtrIp#0" : "192.168.191.10"
+,"icsCtrIp#1" : "192.168.191.11"
+,"sipPbxIp#0" : "192.168.191.20"
+,"sipPbxIp#1" : "192.168.191.21"
+,"t1PbxIp#0" : "192.168.191.30"
+,"fxoPbxIp#0" : "192.168.191.40"
+,"fxoPbxIp#1" : "192.168.191.41"
+,"fxsPbxIp#0" : "192.168.191.50"
+,"fxsPbxIp#1" : "192.168.191.51"
+,"roipPbxIp#0" : "192.168.191.60"
+,"roipPbxIp#1" : "192.168.191.61"
+,"magPbxIp#0" : "192.168.191.70"
+,"magPbxIp#1" : "192.168.191.71"
+,"nasIp#0" : "192.168.191.80"
+,"sipPhoneRingTime" : "30"
+,"dsc~icsSet" : "number~icsName~outIp~mainIp~subIp"
+,"icsSet" : "0~icsName0~192.168.192.111~undefined~undefined"
+,"icsUiSet" : "192.168.192.103~192.168.191.104~192.168.191.105"
+,"icsGroups" : [
+     "0~icsName01~192.168.192.0"
+    ,"1~icsName1~192.168.192.2"
+    ,"2~icsName2~192.168.192.3"
+    ,"3~icsName3~192.168.192.4"
+    ]
+
+
+,"slotSet_ctr_0" : "192.168.192.0~25000"
+,"slotSet_ctr_1" : "192.168.192.1~25001"
+,"slotSet_sip_0" : "192.168.192.2~25000"
+,"slotSet_sip_1" : "192.168.192.3~25001"
+,"slotSet_fxo_0" : "192.168.192.4~25000"
+,"slotSet_fxo_1" : "192.168.192.5~25001"
+,"slotSet_fxs_0" : "192.168.192.6~25000"
+,"slotSet_fxs_1" : "192.168.192.7~25001"
+,"slotSet_roip_0" : "192.168.192.8~25000"
+,"slotSet_roip_1" : "192.168.192.9~25001"
+,"slotSet_t1s_0" : "192.168.192.10~25000"
+,"slotSet_t1s_1" : "192.168.192.11~25001"
+,"slotSet_mag_0" : "192.168.192.12~25000"
+,"slotSet_mag_1" : "192.168.192.13~25001"
+,"slotSet_record_0" : "192.168.192.14~25000"
+,"slotSet_record_1" : "192.168.192.15~25001"
+
+
+
+
+
+
+,"phAHotlines" : [
+     "Kevin~104"
+    ,"Amy~102"
+    ,"sdfsdf~303"
+    ,"aaa~304"
+    ,"~305"
+    ,"~306"
+    ,"~307"
+    ,"~308"
+    ,"~309"
+    ]
+,"phBHotlines" : [
+     "aaa~102"
+    ,"aaaaa~104"
+    ,"Bname3~403"
+    ,"fff~404"
+    ,"Bname5~405"
+    ,"Bname6~406"
+    ,"Bname7~407"
+    ,"Bname8~408"
+    ,"kkk~409"
+    ]
+,"userAcounts" : [
+     "Bname1~2~1234"
+    ,"B11name2~3~5678"
+    ]
+,"exNoGroups" : [
+     "group1~102,104,106,333"
+    ,"group2~104"
+    ,"group3~102,104,106"
+    ]
+,"dsc~broadGroups" : [
+     "0: callNumber"
+    ,"1: adminGroup"
+    ,"2: userGroup"
+    ]
+,"broadGroups" : [
+     "601~102,0911571153~111"
+    ,"602~104,102~123"
+    ,"603~104~124"
+    ,"604~102~234"
+    ]
+,"dsc~meetGroups" : [
+     " 0: callNumber"
+    ,"1: password"
+    ,"2: groupName or adiminGroup all to anybody "
+    ,"3: groupName or userGroup. all to anybody"
+    ]
+,"meetGroups" : [
+     "700~1234~102,104~102,104,106"
+    ,"701~1235~104~104,106"
+    ,"702~1236~106~104,106"
+    ,"704~1236~all~all"
+    ]
+,"dsc~phExNos" : [
+     "0: phone type"
+    ,"1: slot cnt"
+    ,"2: phone name"
+    ,"3: phone number"
+    ,"4: channel"
+    ,"5: nc"
+    ,"6: retake group"
+    ,"7: jmp group"
+    ]
+,"phExNos" : [
+     "sip~0~sip.1~102~0~nc~~"
+    ,"sip~0~sip.2~104~0~nc~~"
+    ,"sip~0~sip.3~106~0~nc~~"
+    ,"fxo~0~fxo.1~0911571153~0~nc~~"
+    ,"fxo~0~fxo.2~0222136963~0~nc~~"
+    ,"t1s~0~t1s0.1~301~0~nc~~"
+    ,"t1s~0~t1s0.2~302~1~nc~~"
+    ,"t1s~0~t1s0.3~303~2~nc~~"
+    ,"t1s~0~t1s0.4~304~3~nc~~"
+    ,"t1s~1~t1s1.1~305~0~nc~~"
+    ,"t1s~1~t1s1.2~306~1~nc~~"
+    ,"t1s~1~t1s1.3~307~2~nc~~"
+    ,"t1s~1~t1s1.4~308~3~nc~~"
+    ,"mag~0~mag0.1~401~0~nc~~"
+    ,"mag~0~mag0.2~402~1~nc~~"
+    ,"mag~1~mag1.1~403~0~nc~~"
+    ,"mag~1~mag1.2~404~1~nc~~"
+    ,"soft~0~soft.1~120~0~nc~group1~all"
+    ,"soft~0~soft.2~121~0~nc~~all"
+    ,"soft~0~soft.3~122~0~nc~~group1"
+    ,"roip~0~roip0.1~190~0~nc~~"
+    ,"roip~0~roip0.2~191~1~nc~~"
+    ,"roip~0~roip0.3~192~2~nc~~group3"
+    ,"roip~1~roip1.1~193~0~nc~~"
+    ,"roip~1~roip1.2~194~1~nc~~"
+    ,"roip~1~roip1.3~195~2~nc~~group3"
+    ,"fxs~0~fxs0.1~203~3~nc~~"
+    ,"fxs~0~fxs0.2~204~1~nc~~"
+    ,"fxs~1~fxs1.1~203~3~nc~~"
+    ,"fxs~1~fxs1.2~204~1~nc~~"
+    ]
+,"dsc~slotInfos" : [
+     " 0: slot Type(ctr|sip|fxo|fxs|t1|record|roip)"
+    ,"1: slot login user name"
+    ,"2: slot login password"
+    ,"3: slot number"
+    ,"4: slot trunk name"
+    ,"5: slot ip"
+    ]
+,"slotInfos" : [
+     "sip,mainpbx,123456789,0,mainpbx,192.168.191.2"
+    ,"t1,t1pbx,123456789,0,t1pbx,192.168.191.3"
+    ,"fxo,fxopbx,123456789,0,fxopbx,192.168.191.4"
+    ,"fxs,fxspbx,123456789,0,fxspbx,192.168.191.5"
+    ,"roip,pi,1234,0,0,0"
+    ]
+,"exRegisterPin" : "123456789"
+}

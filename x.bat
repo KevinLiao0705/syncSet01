@@ -1,0 +1,1 @@
+java -jar ./dist/base3.jar

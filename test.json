@@ -1,0 +1,156 @@
+{
+    "version" : "1000"
+   ,"uart0_port" : "7"
+   ,"uart0_boudrate" : "115200"
+   ,"uart0_parity" : "None"
+
+   ,"processType" : "sipPbx"
+
+
+   ,"icsCtrIp#0" : "192.168.191.10"
+   ,"icsCtrIp#1" : "192.168.191.11"
+   ,"sipPbxIp#0" : "192.168.191.20"
+   ,"sipPbxIp#1" : "192.168.191.21"
+   ,"t1PbxIp#0" : "192.168.191.30"
+   ,"fxoPbxIp#0" : "192.168.191.40"
+   ,"fxoPbxIp#1" : "192.168.191.41"
+   ,"fxsPbxIp#0" : "192.168.191.50"
+   ,"fxsPbxIp#1" : "192.168.191.51"
+   ,"roipPbxIp#0" : "192.168.191.60"
+   ,"roipPbxIp#1" : "192.168.191.61"
+   ,"magPbxIp#0" : "192.168.191.70"
+   ,"magPbxIp#1" : "192.168.191.71"
+   ,"nasIp#0" : "192.168.191.80"
+
+
+   ,"sipPhoneRingTime" : "30"
+
+
+   ,"phAHotlines" : [
+        "Kevin,2000"
+       ,"Amy,2001"
+       ,",303"
+       ,",304"
+       ,",305"
+       ,",306"
+       ,",307"
+       ,",308"
+       ,",309"
+       ]
+   ,"phBHotlines" : [
+        "Bname1,401"
+       ,"Bname2,402"
+       ,"Bname3,403"
+       ,"Bname4,404"
+       ,"Bname5,405"
+       ,"Bname6,406"
+       ,"Bname7,407"
+       ,"Bname8,408"
+       ,"Bname9,409"
+       ]
+   ,"userAcounts" : [
+        "Bname1,0,1234"
+       ,"Bname2,0,5678"
+       ]
+
+   ,"exNoGroups" : [
+       "group1,102,104,106"
+       ,"group2"
+       ,"group3,102,104,106"
+   ]   
+    
+   ,"dsc~broadGroups" : [
+    "0: callNumber"
+   ,"1: adminGroup"
+   ,"2: userGroup"
+]   
+
+   ,"broadGroups" : [
+     "601~102,0911571153~104,106"
+    ,"602~104,102~102,104,106"
+    ,"603~104~106"
+]   
+
+
+
+,"dsc~meetGroups" : [
+    " 0: callNumber"
+    ,"1: password"
+    ,"2: groupName or adiminGroup all to anybody "
+    ,"3: groupName or userGroup. all to anybody"
+]
+,"meetGroups" : [
+    "700~1234~102,104~102,104,106"
+    ,"701~1235~104~104,106"
+    ,"702~1236~106~104,106"
+    ,"704~1236~all~all"
+]   
+  
+
+
+,"dsc~phExNos" : [
+    " 0: phone type"
+    ,"1: phone name"
+    ,"2: phone number"
+    ,"3: jmp number"
+    ,"4: broadcast group"
+    ,"5: meet group"
+    ,"6: retake group"
+    ,"7: jmp group"
+]   
+   ,"phExNos" : [
+    "soft,soft-0,120,0,0,0,0,0"
+    ,"sip,sip-0,102,0,0,0,0,0"
+    ,"sip,sip-1,104,0,0,0,0,0"
+    ,"sip,sip-2,106,0,0,0,0,0"
+    ,"sip,sip-0,108,0,0,0,0,0"
+    ,"sip,sip-1,110,0,0,0,group1,group3"
+    ,"sip,sip-1,112,0,0,0,group2,group2"
+    ,"sip,sip-0,114,0,0,0,group2,group1"
+   ,"roip,roip-0,190,0,0,0,0,0"
+   ,"roip,roip-1,191,0,0,0,0,0"
+   ,"roip,roip-2,192,0,0,0,0,0"
+   ,"roip,roip-3,193,0,0,0,0,0"
+   ,"fxo,fxo1-0,300,0911571152,0,0,0,0"
+   ,"fxo,fxo1-1,301,0911571153,0,0,0,0"
+   ,"fxo,fxo1-2,302,0911571154,0,0,0,0"
+   ,"fxs1,fxs1-0,400,0,0,0,0,0"
+   ,"fxs1,fxs1-1,401,0,0,0,0,0"
+   ,"fxs2,fxs2-0,402,0,0,0,0,0"
+   ,"fxs2,fxs2-1,403,0,0,0,0,0"
+   ,"t1,t1-0,200,100,0,0,0,0"
+   ,"t1,t1-1,201,100,0,0,0,0"
+   ,"t1,t1-2,202,100,0,0,0,0"
+   ,"t1,t1-3,203,100,0,0,0,0"
+   ,"magnet,magnet-0,180,100,0,0,0,0"
+   ,"magnet,magnet-1,181,100,0,0,0,0"
+   ,"magnet,magnet-2,182,100,0,0,0,0"
+   ,"magnet,magnet-3,183,100,0,0,0,0"
+]
+
+,"dsc~slotInfos" : [
+    " 0: slot Type(ctr|sip|fxo|fxs|t1|record|roip)"
+    ,"1: slot login user name"
+    ,"2: slot login password"
+    ,"3: slot number"
+    ,"4: slot trunk name"
+    ,"5: slot ip"
+
+]    
+
+,"slotInfos" : [
+      "sip,mainpbx,123456789,0,mainpbx,192.168.191.2"
+     ,"t1,t1pbx,123456789,0,t1pbx,192.168.191.3"
+     ,"fxo,fxopbx,123456789,0,fxopbx,192.168.191.4"
+     ,"fxs,fxspbx,123456789,0,fxspbx,192.168.191.5"
+     ,"roip,pi,1234,0,0,0"
+
+
+]    
+   
+   ,"exRegisterPin" : "123456789"
+
+       
+
+
+   }

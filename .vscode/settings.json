@@ -1,0 +1,21 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "commons-net-3.3.jar",
+        "gson-2.10.1.jar",
+        "Java-WebSocket-1.5.7.jar",
+        "javax.jar",
+        "jna-platform-5.2.0.jar",
+        "jsch-0.1.54.jar",
+        "jSerialComm-2.7.0.jar",
+        "log4j-1.2.17.jar",
+        "logback.jar",
+        "org.json.jar",
+        "slf4j-api-2.0.7.jar",
+        "sqlite-jdbc-3.8.10.1.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
+}
