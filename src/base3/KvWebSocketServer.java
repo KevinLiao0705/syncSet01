@@ -5,7 +5,9 @@
  */
 package base3;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.NetworkInterface;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -31,8 +33,21 @@ public class KvWebSocketServer extends WebSocketServer {
     JSONObject wsSysJson = new JSONObject();
 
     public KvWebSocketServer(String ip, Integer port) {
-        super(new InetSocketAddress(ip, port));
+        super(getBindAddress(ip, port));
         putJson(wsSysJson, "serialTime", 0);
+    }
+
+    private static InetSocketAddress getBindAddress(String ip, int port) {
+        try {
+            InetAddress address = InetAddress.getByName(ip);
+            if (address.isAnyLocalAddress() || NetworkInterface.getByInetAddress(address) != null) {
+                return new InetSocketAddress(address, port);
+            }
+        } catch (Exception ex) {
+        }
+
+        System.err.println("WebSocket IP " + ip + " is not available; bind to 0.0.0.0 instead.");
+        return new InetSocketAddress(port);
     }
 
     public void putJson(JSONObject jobj, String key, Object value) {

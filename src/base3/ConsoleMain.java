@@ -628,6 +628,7 @@ public class ConsoleMain {
             GB.webSocketAddr = GB.real_ip_str;
         }
 
+        System.out.println("Set websocket "+GB.webSocketAddr+":"+GB.webSocketPort);
         KvWebSocketServer.serverStart();
         //=======================================================
         rxMap = new HashMap<String, ChkRxA>();
@@ -2346,6 +2347,7 @@ class LogicThread extends Thread {
     public void run() {
         try {
             // Replace "path/to/your/program.exe" with the actual path
+            System.out.println("exe LA program at " + GB.laPath + "/" + GB.laAppName );
             Process process = Runtime.getRuntime().exec(GB.laPath + "/" + GB.laAppName);
             // Optionally, wait for the process to complete and get its exit code
             int exitCode = process.waitFor();

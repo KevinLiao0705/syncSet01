@@ -1,1 +1,0 @@
-copy .\dist\base3.jar .\sipui2in1\sipui2in1_ui\dist\

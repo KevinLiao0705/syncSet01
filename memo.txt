@@ -1,87 +1,335 @@
-Channel: 1
-Description:
-File Descriptor: 19
-Span: 1
-Extension:
-Dialing: no
-Context: autocall
-Caller ID: 301
-Calling TON: 0
-Caller ID subaddress:
-Caller ID name:
-Mailbox: none
-Destroy: 0
-InAlarm: 0
-Signalling Type: FXS Kewlstart
-Radio: 0
-Owner: <None>
-Real: <None>
-Callwait: <None>
-Threeway: <None>
-Confno: -1
-Propagated Conference: -1
-Real in conference: 0
-DSP: no
-Busy Detection: no
-TDD: no
-Relax DTMF: no
-Dialing/CallwaitCAS: 0/0
-Default law: ulaw
-Fax Handled: no
-Pulse phone: no
-HW Gains (RX/TX): 0.0/8.0
-SW Gains (RX/TX): 0.00/0.00
-Dynamic Range Compression (RX/TX): 0.00/0.00
-DND: no
-Echo Cancellation:
-        128 taps
-        currently OFF
-Wait for dialtone: 0ms
-Actual Confinfo: Num/0, Mode/0x0000
-Actual Confmute: No
-Hookstate (FXS only): Offhook
+git init
+touch README.md
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/KevinLiao0705/microBlaze200.git
+git push -u origin main
 
-fxo call in on <dahdi show channel 1>
-**********************************************************
-Channel: 1
-Description:
-File Descriptor: 19
-Span: 1
-Extension:
-Dialing: no
-Context: autocall
-Caller ID: 301
-Calling TON: 0
-Caller ID subaddress:
-Caller ID name:
-Mailbox: none
-Destroy: 0
-InAlarm: 0
-Signalling Type: FXS Kewlstart
-Radio: 0
-Owner: DAHDI/1-1
-Real: DAHDI/1-1
-Callwait: <None>
-Threeway: <None>
-Confno: -1
-Propagated Conference: -1
-Real in conference: 0
-DSP: yes
-Busy Detection: no
-TDD: no
-Relax DTMF: no
-Dialing/CallwaitCAS: 0/0
-Default law: ulaw
-Fax Handled: no
-Pulse phone: no
-HW Gains (RX/TX): 0.0/8.0
-SW Gains (RX/TX): 0.00/0.00
-Dynamic Range Compression (RX/TX): 0.00/0.00
-DND: no
-Echo Cancellation:
-        128 taps
-        currently ON
-Wait for dialtone: 0ms
-Actual Confinfo: Num/0, Mode/0x0000
-Actual Confmute: No
-Hookstate (FXS only): Offhook
+
+
+    always @* 
+    begin
+        if(bmem[5][19:16] == 4'b0000)begin
+            laChR[0] = hostWgPreDataGate_f;
+            laChR[1] = hostPreDataGate_f;
+            laChR[2] = hostWgTrigGate_f;
+            laChR[3] = s1WgTrigGate_f;
+            laChR[4] = hostVideoGate_f;
+            laChR[5] = s1VideoGate_f;
+            laChR[6] = hostS1TxData_w;
+            laChR[7] = s1SyncPreDataGate_f;
+            //===========================
+        end
+        if(bmem[5][19:16] == 4'b0001)begin
+            laChR[0] = hostWgTrigGate_f;
+            laChR[1] = s1WgTrigGate_f;
+            laChR[2] = wgDataBit_f;
+            laChR[3] = wgClk_f;
+            laChR[4] = wgTrig_f;
+            laChR[5] = wgRfout_f; 
+            laChR[6] = hostVideoGate_f;
+            laChR[7] = s1VideoGate_f;
+            //===========================
+        end  
+        if(bmem[5][19:16] == 4'b0010)begin
+            laChR[0] = hostS1TxData_w;
+            laChR[1] = s1SyncTxData_w;
+            laChR[2] = hostS1RxIn_f;
+            laChR[3] = hostS2RxIn_f;
+            laChR[4] = s1SyncRxIn_f;
+            laChR[5] = s1SyncRxPack_f; 
+            laChR[6] = hostS1RxPack_w;
+            laChR[7] = hostS2RxPack_w;
+            //===========================
+        end  
+        if(bmem[5][19:16] == 4'b0011)begin
+            laChR[0] = hostVideoGate_f;
+            laChR[1] = s1VideoGate_f;
+            laChR[2] = hostWgTrigGate_f;
+            laChR[3] = s1WgTrigGate_f;
+            laChR[4] = hostS1RxIn_f;
+            laChR[5] = s1LocalRxIn_f; 
+            laChR[6] = hostS1RxClk4m_w;
+            laChR[7] = s1LocalRxClk4m_w;
+            //===========================
+        end  
+        if(bmem[5][19:16] == 4'b0100)begin
+            laChR[0] = s1FibRxIn_f;
+            laChR[1] = s1FibRxPack_w;
+            laChR[2] = s1RfRxIn_f;
+            laChR[3] = s1RfRxPack_w;
+            laChR[4] = s1LocalRxIn_f;
+            laChR[5] = s1LocalRxPack_w; 
+            laChR[6] = s1WgRxIn_f;
+            laChR[7] = s1WgRxPack_f;
+            //laChR[0] = hdfioiA[0];
+            //laChR[1] = hdfioiA[1];
+            //laChR[2] = hdfioiA[2];
+            //laChR[3] = hdfioiA[3];
+            //laChR[4] = hdfioiA[4];
+            //laChR[5] = hdfioiA[5]; 
+            //laChR[6] = hdfioiA[6];
+            //laChR[7] = hdfioiA[7];
+            //===========================
+        end  
+        if(bmem[5][19:16] == 4'b0101)begin
+            laChR[0] = s1WgGate_f;
+            laChR[1] = s1WgInhibit_f;
+            laChR[2] = s1WgTrigGate_f;
+            laChR[3] = s1VideoGate_f;
+            laChR[4] = testBuf[0];
+            laChR[5] = testBuf[1];
+            laChR[6] = testBuf[2];
+            laChR[7] = testBuf[3];
+        
+        
+
+            //laChR[0] = hdfioiA[8];
+            //laChR[1] = hdfioiA[9];
+            //laChR[2] = hdfioiA[10];
+            //laChR[3] = hdfioiA[11];
+            //laChR[4] = hdfioiA[12];
+            //laChR[5] = hdfioiA[13];
+            //laChR[6] = wgRfOut;
+            //laChR[7] = debugPin1_f;
+            //===========================
+        end
+        
+        
+        //input wire [11:0] rfInA,
+        // 0:aRfmaCko,  1:aRfmaDio1,  2:aRfmaD0,  3:aRfmbCko,  4:aRfmbDio1,  5:aRfmbD0,
+        // 6:bRfmaCko,  7:bRfmaDio1,  8:bRfmaD0,  9:bRfmbCko,  10:bRfmbDio1,  11:bRfmbD0,
+       
+        //rfOutA
+        // 0:aRfmaDio2,  1:aRfmbDio2, 2:bRfmaDio2,  3:bRfmbDio2,        
+        
+        if(bmem[5][19:16] == 4'b0110)begin
+            laChR[0] = rfInA[0]; //1 RFMA_CKO
+            laChR[1] = rfOutA[0];//1 RFMA_DIO2 txd 
+            laChR[2] = rfInA[4]; //1 RFMB_DIO1  rxd
+            laChR[3] = rfInA[6]; //2 RFMA_CKO
+            laChR[4] = rfOutA[2];//2 RFMA_DIO2 txd
+            laChR[5] = rfInA[10];//2 RFMB_DIO1 rxd
+            laChR[6] = gpsPps;
+            laChR[7] = hostS1TxDataClk_w;
+            //===========================
+        end  
+          
+        if(bmem[5][19:16] == 4'b0111)begin
+            laChR[0] = fibTxA[0];
+            laChR[1] = fibRxA[0];
+            laChR[2] = fibTxA[1];
+            laChR[3] = fibRxA[1];
+            laChR[4] = fibTxA[2];
+            laChR[5] = fibRxA[2];
+            laChR[6] = fibTxA[3];
+            laChR[7] = fibRxA[3];
+            //===========================
+        end
+          
+          
+        if(bmem[5][19:16] == 4'b1000)begin
+            laChR[0] = fibTxB1;
+            laChR[1] = fibRxB1;
+            laChR[2] = fibTxB3;
+            laChR[3] = fibRxB3;
+            laChR[4] = fibTxB5;
+            laChR[5] = fibRxB5; 
+            laChR[6] = fibTxB7;
+            laChR[7] = fibRxB7;
+            //===========================
+        end  
+        if(bmem[5][19:16] == 4'b1001)begin
+            laChR[0] = txSysData1_load_w;
+            laChR[1] = txSysData1_clk_w;
+            laChR[2] = txSysData1_data_w;
+            laChR[3] = rxSysData1_in_f;;
+            laChR[4] = rxSysData1_clk_w;
+            laChR[5] = rxSysData1_pack_w; 
+            laChR[6] = hostS1TxEnd_w;
+            laChR[7] = hostS1RxPack_w;
+            //===========================
+        end  
+        
+        if(bmem[5][19:16] == 4'b1010)begin
+            laChR[0] = a_snd_clk;
+            laChR[1] = a_snd_tx;
+            laChR[2] = aSndRx;
+            laChR[3] = b_snd_clk;
+            laChR[4] = b_snd_tx;
+            laChR[5] = bSndRx;
+            laChR[6] = 0;
+            laChR[7] = 0;
+            //===========================
+        end  
+        
+        if(bmem[5][19:16] == 4'b1011)begin
+            laChR[0] = inpChk0;     //rs485Di fpga->485
+            laChR[1] = inpChk1;     //rs485Ro 485->fpga
+            laChR[2] = inpChkA[3];  //rs485De fpga->485
+            laChR[3] = inpChk2;     //ipcRx  fpga->ipc
+            laChR[4] = inpChk3;     //ipcTx  ipc->fpda
+            laChR[5] = s1WgRxIn_f;
+            laChR[6] = s1WgRxPack_f;
+            laChR[7] = 0;
+            //===========================
+        end  
+        if(bmem[5][19:16] == 4'b1100)begin
+            laChR[0] = hdfoR[0];
+            laChR[1] = hdfoR[1];
+            laChR[2] = hdfoR[2];
+            laChR[3] = hdfoR[3];
+            laChR[4] = hdfoR[4];
+            laChR[5] = hdfoR[5];
+            laChR[6] = hdfoR[6];
+            laChR[7] = hdfoR[7];
+            //===========================
+        end  
+        if(bmem[5][19:16] == 4'b1101)begin
+            laChR[0] = hdfioIA[0];
+            laChR[1] = hdfioIA[1];
+            laChR[2] = hdfioIA[2];
+            laChR[3] = hdfioIA[3];
+            laChR[4] = hdfioIA[4];
+            laChR[5] = hdfioIA[5];
+            laChR[6] = hdfioIA[6];
+            laChR[7] = hdfioIA[7];
+            //===========================
+        end  
+        if(bmem[5][19:16] == 4'b1110)begin
+            laChR[0] = debug0_f;
+            laChR[1] = debug1_f;
+            laChR[2] = hdfioIA[8];
+            laChR[3] = hdfioIA[9];
+            laChR[4] = hdfioIA[10];
+            laChR[5] = hdfioIA[11];
+            laChR[6] = hdfioIA[12];
+            laChR[7] = hdfioIA[13];
+            //===========================
+        end  
+        if(bmem[5][19:16] == 4'b1111)begin
+            laChR[0] = mem[17][8];
+            laChR[1] = mem[17][9];
+            laChR[2] = mem[17][10];
+            laChR[3] = mem[17][11];
+            laChR[4] = s1LocalRxIn_f;
+            laChR[5] = s1LocalRxPack_w; 
+            laChR[6] = s1SyncRxPack_f;
+            laChR[7] = s1WgTrigGate_f;
+            //===========================
+        end  
+        
+
+
+
+     mast mainStatus[1:0] 		==> 0:none, 1:warn up, 2:ready, 3:error ==>mast
+     //sub1 mainStatus[3:2] 		==> 0:none, 1:warn up, 2:ready, 3:error	==>mast,sub
+     //sub2 mainStatus[5:4] 		==> 0:none, 1:warn up, 2:ready, 3:error ==>mast
+     //ctr1 mainStatus[7:6] 		==> 0:none, 1:warn up, 2:ready, 3:error ==>mast,sub,ctr
+     //ctr2 mainStatus[9:8] 		==> 0:none, 1:warn up, 2:ready, 3:error ==>mast
+     //drv1a mainStatus[11:10] 	==> 0:none, 1:warn up, 2:ready, 3:error ==>mast,sub,ctr,drva
+     //drv1b mainStatus[13:12] 	==> 0:none, 1:warn up, 2:ready, 3:error ==>mast,sub,ctr,drvb
+     //drv2a mainStatus[15:14] 	==> 0:none, 1:warn up, 2:ready, 3:error ==>mast
+     //drv2b mainStatus[17:16] 	==> 0:none, 1:warn up, 2:ready, 3:error ==>mast
+     //ctr1Meter mainStatus[19:18] 	==> 0:none, 1:warn up, 2:ready, 3:error ==>mast,sub,ctr,meter
+     //ctr2Meter mainStatus[21:20] 	==> 0:none, 1:warn up, 2:ready, 3:error ==>mast
+     //===
+     ctr1 rfPulse detect flag[22]       ==> 0:none 1:OK			==>mats,sub,ctr
+     ctr1 powerOnStatus[23] 			==> 0:Off 1:On			==>mats,sub,ctr
+     ctr1 sspaEnableStatus[24] 			==> 0:disable 1:enable	==>mats,sub,ctr
+     ctr1 pulseEnableStatus[25] 		==> 0:disable 1:enable	==>mats,sub,ctr
+     ctr1 emergencyStopStatus[26] 		==> 0:nono 1:stop		==>mats,sub,ctr
+     //===
+     ctr2 rfPulse detect flag[27] 		==> 0:none  1:OK  		==>mast
+     ctr2 powerOnStatus[28] 			==> 0:Off 1:On			==>mast
+     ctr2 sspaEnableStatus[29] 			==> 0:disable 1:enable	==>mast
+     ctr2 pulseEnableStatus[30] 		==> 0:disable 1:enable	==>mast
+     ctr2 emergencyStopStatus[31] 		==> 0:nono 1:stop		==>mast
+     */
+    u32 systemStatus0;
+
+
+
+
+
+    /*=================================================
+    sub1 fiberConnectStatus[0]		==> 0:none, 1:connected		==>mats,sub,
+    sub1 rfConnectStatus[1]     	==> 0:none, 1:connected		==>mats,sub,
+    sub2 fiberConnectStatus[2] 		==> 0:none, 1:connected		==>mast
+    sub2 rfConnectStatus[3]    		==> 0:none, 1:connected		==>mast
+
+    ctr1 remoteControlEnable[4]		==> 0:none, 1:enable		==>mast,sub,ctr
+    ctr2 remoteControlEnable[5]		==> 0:none, 1:enable		==>mast
+    mast spPulseExist[6]			==  0:none 1:exist			==>mast
+    ctr1 allSspaEnviSlatus[7] 		==> 0:OK, 1:Error			==>mast,sub,ctr,ctrIpc
+
+    ctr1 allSspaPowerSlatus[8] 		==> 0:OK, 1:Error			==>mast,sub,ctr,ctrIpc
+    ctr1 allSspaModuleSlatus[9] 	==> 0:OK, 1:Error			==>mast,sub,ctr,ctrIpc
+    ctr1 overWidth[10] 				==> 0:OK, 1:Error			==>mast,sub,ctr,ctrIpc
+    ctr1 overDuty[11] 				==> 0:OK, 1:Error			==>mast,sub,ctr,ctrIpc
+
+    ctr2 allSspaEnviSlatus[12] 		==> 0:OK, 1:Error			==>mast
+    ctr2 allSspaPowerSlatus[13] 	==> 0:OK, 1:Error			==>mast
+    ctr2 allSspaModuleSlatus[14] 	==> 0:OK, 1:Error			==>mast
+    ctr2 overWidth[15] 				==> 0:OK, 1:Error			==>mast
+    ctr2 overDuty[16] 				==> 0:OK, 1:Error			==>mast
+    /*=================================================
+    ctr1 meterStatus[17] 			==> 0:OK, 1:Error			==>mast,sub,ctr,ctrIpc
+    ctr2 meterStatus[18] 			==> 0:OK, 1:Error			==>mast
+    mast spPulseExist[19]			==  0:none 1:exist			==>mast
+
+    ctr1 loadType[20]      			==> 0:dummyLoad, 1:ant		==>mast,sub,ctr,meter
+    ctr2 loadType[21]      			==> 0:dummyLoad, 1:ant		==>mast
+    ctr1 battleShort[22]      		==> 0:Off, 1:On				==>mast,sub,ctr
+    ctr2 battleShort[23]      		==> 0:Off, 1:On				==>mast
+
+    sub1MastPulseExist[24]			==  0:none 1:exist			==>mast,sub
+    sub2MastPulseExist[25]			==  0:none 1:exist			==>mast
+    ctr1 pusleFrom[26]				==  0:remoute 1:local		==>mast,sub,ctr
+    sub1 pulseFrom[27]				==  0:remoute 1:local		==>mast,sub
+
+    ctr2 pusleFrom[28]				==  0:remoute 1:local		==>mast
+    sub2 pulseFrom[29]				==  0:remoute 1:local		==>mast
+
+
+    */
+    u32 systemStatus1;
+    //=============================================
+
+
+
+
+    /*=============================================================================
+    emulate flag[1:0] ==> 0:no ,1:syncSet emulate, 2:vitis emulate  ==>all
+    //
+    ctr remote[2] ==> 0:disable 1:enable	==>ctr
+    xxx[3] ==> 0:disable 1:enable
+    //
+    mast pulse source[4] ==> 0:SP, 1:local generate  ==>mast
+    sub pulse source[5] ==> 0:from mast, 1:local generate ==>sub
+    ctr pulseSource[6] ==> 0:from sub, 1:local generate	==>ctr
+    ctr battle short[7] ==> 0:close, 1:open ==>ctr
+    ctr txLoad[8] ==> 0:dummyLoad,1:ant ==>ctr
+    meter sp4tCnt[9] ==>  0:input power, 1:driver poser, 2:cw power, 3:ccw power ==>ctr
+    //
+   	mastToSub1CommType[14:13] ==> 0: fiber, 1:rf, 2:auto, 3:none	==>mast
+   	mastToSub2CommType[16:15] ==> 0: fiber, 1:rf, 2:auto, 3:none	==>mast
+   	//
+   	xxx[17] ==> 0:, 1:
+   	xxx[18] ==> 0:, 1:
+   	//
+    subCommType[20:19] ==> 0: fiber, 1:rf, 2:auto, 3:none		==>sub
+    xxx[22:21] ==> 0: fiber, 1:rf, 2:auto, 3:none
+    //
+    subChSyncType[23] ==> 0: fix delay, 1:1588	==>sub
+    xxx[24] ==> 0: fix delay, 1:1588
+
+   	mastToSub1SpeechEnable[25] ==> 0:disable, 1:enable ==>mast
+   	mastToSub2SpeechEnable[26] ==> 0:disable, 1:enable ==>mast
+
+   	SSPA module protect flag[27] ==> 0:off, 1:on: ==>ctr
+
+   	fpgaId[31:28] ==> ==>all
+    */
+    u32 systemFlag0;

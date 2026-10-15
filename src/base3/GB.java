@@ -131,7 +131,7 @@ public class GB {
         
         
         
-        if (GB.osName.equals("win")) {
+        if (GB.osName.contains("win")) {
             GB.process_inx = 0; //0:consoleMain, 
             GB.os_inx = 0;     //0:windows 1://linux    
             GB.setdata_xml = "./setdata.xml";
@@ -147,7 +147,7 @@ public class GB {
             GB.chromeAddress="http://localhost:8080/webBase/index.jsp";
             //GB.logPath = "./log";
         }
-        if (GB.osName.equals("linux")) {        
+        if (GB.osName.contains("linux")) {        
             GB.process_inx = 0; //0:consoleMain
             GB.os_inx = 1;     //0:windows 1://linux    
             GB.setdata_xml = "./setdata.xml";
