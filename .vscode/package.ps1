@@ -1,3 +1,7 @@
+param(
+    [string]$JavaHome = "C:\Program Files\Java\jdk-11"
+)
+
 $ErrorActionPreference = "Stop"
 
 function Format-ManifestLine {
@@ -16,13 +20,18 @@ function Format-ManifestLine {
 }
 
 $workspace = Split-Path -Parent $PSScriptRoot
-$classes = Join-Path $workspace "bin"
+$classes = Join-Path $workspace "build\package-classes"
 $dist = Join-Path $workspace "dist"
 $distLib = Join-Path $dist "lib"
 $jarPath = Join-Path $dist "base3.jar"
 
-if (-not (Test-Path (Join-Path $classes "base3\Base3.class"))) {
-    throw "Missing bin\base3\Base3.class. Compile the Java project in VS Code first."
+$javac = Join-Path $JavaHome "bin\javac.exe"
+if (-not (Test-Path -LiteralPath $javac)) {
+    throw "JDK 11 compiler not found: $javac"
+}
+$compilerVersion = & $javac -version 2>&1
+if ($LASTEXITCODE -ne 0 -or "$compilerVersion" -notmatch '^javac 11\.') {
+    throw "Packaging requires JDK 11; found: $compilerVersion"
 }
 
 $libraries = @(
@@ -40,13 +49,43 @@ $libraries = @(
     "jna-platform-5.2.0.jar"
 )
 
-New-Item -ItemType Directory -Force -Path $distLib | Out-Null
 foreach ($library in $libraries) {
     $source = Join-Path $workspace "lib\$library"
     if (-not (Test-Path $source)) {
         throw "Missing dependency: lib\$library"
     }
-    Copy-Item $source (Join-Path $distLib $library) -Force
+}
+
+# Use a separate, clean output directory, never the IDE's potentially newer classes.
+$expectedClasses = [System.IO.Path]::GetFullPath((Join-Path $workspace "build\package-classes"))
+if ([System.IO.Path]::GetFullPath($classes) -ne $expectedClasses) {
+    throw "Unexpected compiler output directory: $classes"
+}
+if (Test-Path -LiteralPath $classes) {
+    Remove-Item -LiteralPath $classes -Recurse -Force
+}
+New-Item -ItemType Directory -Force -Path $classes | Out-Null
+$sourceRoot = Join-Path $workspace "src"
+$sources = @(Get-ChildItem -LiteralPath $sourceRoot -Recurse -File -Filter "*.java" | ForEach-Object { $_.FullName })
+if ($sources.Count -eq 0) {
+    throw "No Java source files found in $sourceRoot"
+}
+$compileClassPath = ($libraries | ForEach-Object { Join-Path $workspace "lib\$_" }) -join ";"
+Write-Host "Compiling with $compilerVersion (release 11)..."
+& $javac --release 11 -encoding UTF-8 -classpath $compileClassPath -d $classes $sources
+if ($LASTEXITCODE -ne 0) {
+    throw "Java 11 compilation failed (exit code $LASTEXITCODE). Package not updated."
+}
+Get-ChildItem -LiteralPath $sourceRoot -Recurse -File | Where-Object { $_.Extension -ne ".java" } | ForEach-Object {
+    $relativePath = $_.FullName.Substring($sourceRoot.Length + 1)
+    $destination = Join-Path $classes $relativePath
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $destination) | Out-Null
+    Copy-Item -LiteralPath $_.FullName -Destination $destination -Force
+}
+
+New-Item -ItemType Directory -Force -Path $distLib | Out-Null
+foreach ($library in $libraries) {
+    Copy-Item -LiteralPath (Join-Path $workspace "lib\$library") -Destination (Join-Path $distLib $library) -Force
 }
 
 Add-Type -AssemblyName System.IO.Compression

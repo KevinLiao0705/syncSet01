@@ -196,6 +196,13 @@ public class ConsoleMain {
                 return outJson;
             }
 
+            if (act.contains("speechAct")) {
+                scla.setEasyCommand(0x2030, null);
+                outJson.put("status", "ok");
+                return outJson;
+            }
+
+
             if (GB.appId == 0) {
                 return outJson;
             }

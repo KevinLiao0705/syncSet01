@@ -1,4 +1,4 @@
-git init
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 git init
 touch README.md
 git add .
 git commit -m "first commit"
@@ -11,9 +11,9 @@ git push -u origin main
     always @* 
     begin
         if(bmem[5][19:16] == 4'b0000)begin
-            laChR[0] = hostWgPreDataGate_f;
-            laChR[1] = hostPreDataGate_f;
-            laChR[2] = hostWgTrigGate_f;
+            laChR[0] = hostWgPreDataGate_f;	//vedioGate pre start signal, low act 1 us
+            laChR[1] = hostPreDataGate_f;		//syncTxData pre start signal,low act 0.1 us
+            laChR[2] = hostWgTrigGate_f;		//
             laChR[3] = s1WgTrigGate_f;
             laChR[4] = hostVideoGate_f;
             laChR[5] = s1VideoGate_f;
